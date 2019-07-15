@@ -16,5 +16,5 @@ const kButtonTextStyle = TextStyle(
 );
 
 const kConditionTextStyle = TextStyle(
-  fontSize: 80.0,
+  fontSize: 65.0,
 );

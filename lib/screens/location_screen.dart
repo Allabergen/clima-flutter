@@ -1,3 +1,4 @@
+import 'package:clima/services/weather.dart';
 import 'package:flutter/material.dart';
 import 'package:clima/utilities/constants.dart';
 
@@ -12,8 +13,10 @@ class LocationScreen extends StatefulWidget {
 
 class _LocationScreenState extends State<LocationScreen> {
   int temp;
-  int cond;
+  String weatherIcon;
   String city;
+  String msg;
+  WeatherModel weather = WeatherModel();
 
   @override
   void initState() {
@@ -23,10 +26,14 @@ class _LocationScreenState extends State<LocationScreen> {
   }
 
   void updateUI(dynamic weatherData) {
-    city = weatherData['name'];
-    var _temp = weatherData['main']['temp'];
-    temp = _temp.toInt();
-    cond = weatherData['weather'][0]['id'];
+    setState(() {
+      city = weatherData['name'];
+      var _temp = weatherData['main']['temp'];
+      temp = _temp.toInt();
+      var cond = weatherData['weather'][0]['id'];
+      weatherIcon = weather.getWeatherIcon(cond);
+      msg = weather.getMessage(temp);
+    });
   }
 
   @override
@@ -52,16 +59,18 @@ class _LocationScreenState extends State<LocationScreen> {
                 children: <Widget>[
                   FlatButton(
                     onPressed: () {},
+                    padding: EdgeInsets.only(top: 15.0),
                     child: Icon(
                       Icons.near_me,
-                      size: 50.0,
+                      size: 40.0,
                     ),
                   ),
                   FlatButton(
                     onPressed: () {},
+                    padding: EdgeInsets.only(top: 15.0),
                     child: Icon(
                       Icons.location_city,
-                      size: 50.0,
+                      size: 40.0,
                     ),
                   ),
                 ],
@@ -75,16 +84,16 @@ class _LocationScreenState extends State<LocationScreen> {
                       style: kTempTextStyle,
                     ),
                     Text(
-                      '☀️',
+                      weatherIcon,
                       style: kConditionTextStyle,
                     ),
                   ],
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(right: 15.0),
+                padding: EdgeInsets.only(left: 5.0, right: 15.0, bottom: 15.0),
                 child: Text(
-                  "It's 🍦 time in San Francisco!",
+                  '$msg in $city',
                   textAlign: TextAlign.right,
                   style: kMessageTextStyle,
                 ),

@@ -20,12 +20,12 @@ class _LoadingScreenState extends State<LoadingScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            RaisedButton(
-              onPressed: () {
-                getLocationData();
-              },
-              child: Text('Get Location'),
-            ),
+            // RaisedButton(
+            //   onPressed: () {
+            //     // getLocationData();
+            //   },
+            //   child: Text('Get Location'),
+            // ),
             SpinKitRipple(
               color: Colors.white,
               size: 100.0,
@@ -39,7 +39,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   void initState() {
     super.initState();
-    // getLocation();
+    getLocationData();
   }
 
   void getLocationData() async {
